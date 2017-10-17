@@ -25,12 +25,12 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     var serverURLsUpdatedDictArray = [[String: String]]()
     let userDefault = UserDefaults.standard
     let templateURLKey: String! = ""
-    
+
     enum AdminTableSection {
         static let ServerURLSection = 0
         static let OtherDetailsSection = 1
     }
-    
+
     enum AdminScreenRowHeight {
         static let textFieldCellHeight = 60.0
         static let defaultHeight = 91.0
@@ -43,7 +43,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     */
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if let profileLog = userDefault.value(forKey: AdminSettingsConstants.UniqueKeyConstants.enableDeviceLogs) as? Bool {
             kaEnableProfileLogs = profileLog
         }
@@ -65,7 +65,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         self.title = AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.navigationTitle
         self.setDoneButton()
     }
-    
+
     func setDoneButton() {
         let hmBtn = UIButton()
         hmBtn.frame = CGRect(x: 0, y: 0, width: 71, height: 30)
@@ -184,7 +184,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                 }
             case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.viewMySrDetailVer:
                 cell?.subTitleLabel.text = AdminSettingsConstants.adminStringConstants.notApplicable
-                if let version = UserDefaults.standard.object(forKey:userDefaultsKey) as? String {
+                if let version = UserDefaults.standard.object(forKey: userDefaultsKey) as? String {
                     cell?.subTitleLabel.text = version
                 }
                 break
@@ -197,7 +197,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                 break
             case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateVer:
                 cell?.subTitleLabel.text = AdminSettingsConstants.adminStringConstants.notApplicable
-                if let version = UserDefaults.standard.object(forKey:userDefaultsKey) as? String {
+                if let version = UserDefaults.standard.object(forKey: userDefaultsKey) as? String {
                     cell?.subTitleLabel.text = version
                 }
                 break
@@ -268,7 +268,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         // Updating userdefaults with edited data
         for updatedValueDict in serverURLsUpdatedDictArray {
             let dict = updatedValueDict as NSDictionary
-            if let updatedKey = dict.object(forKey: AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey) as? String , let updatedValue  = dict.object(forKey: AdminSettingsConstants.UniqueKeyConstants.titleKey) as? String {
+            if let updatedKey = dict.object(forKey: AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey) as? String, let updatedValue = dict.object(forKey: AdminSettingsConstants.UniqueKeyConstants.titleKey) as? String {
                 userDefault.set(updatedValue, forKey: updatedKey)
             }
         }
@@ -282,7 +282,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         let array = self.section_row_Details_Array[0] as! NSArray
         let dict = array[textField.tag] as! NSDictionary
         if let userDefaultsKey = dict[AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey] as? String {
-            serverURLsUpdatedDictArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: textField.text ?? "" , AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: userDefaultsKey])
+            serverURLsUpdatedDictArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: textField.text ?? "", AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: userDefaultsKey])
         }
     }
 

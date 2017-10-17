@@ -16,8 +16,6 @@ class ServerURL_TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-//        let commonConfig = CommonConfigurationClass.sharedInstance
-//        commonConfig.applyAppThemeToFloatingTextField(self.ServerURLTextField)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
