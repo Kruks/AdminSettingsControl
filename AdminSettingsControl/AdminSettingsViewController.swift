@@ -62,7 +62,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     */
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.title = "Settings"
+        self.title = AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.navigationTitle
         self.setDoneButton()
     }
     
@@ -104,13 +104,13 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         let dict = array[indexPath.row] as! NSDictionary
         let title = dict[AdminSettingsConstants.UniqueKeyConstants.titleKey] as! String
         let userDefaultsKey = dict[AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey] as! String
-
+        let bundle = Bundle(identifier: AdminSettingsConstants.adminBundleID)
         if indexPath.section == AdminTableSection.ServerURLSection {
             let cellIdentifier = "ServerURL_TableViewCell"
             var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? ServerURL_TableViewCell
             if cell == nil {
                 cell = ServerURL_TableViewCell(style: .default, reuseIdentifier: cellIdentifier)
-                let nib = Bundle.main.loadNibNamed("ServerURL_TableViewCell", owner: self, options: nil)
+                let nib = bundle?.loadNibNamed("ServerURL_TableViewCell", owner: self, options: nil)
                 if (nib?.count)! > 0 {
                     cell = nib?[0] as? ServerURL_TableViewCell
                 }
@@ -132,7 +132,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
             var cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? KALoggerDetails_TableViewCell
             if cell == nil {
                 cell = KALoggerDetails_TableViewCell(style: .default, reuseIdentifier: cellIdentifier)
-                let nib = Bundle.main.loadNibNamed("KALoggerDetails_TableViewCell", owner: self, options: nil)
+                let nib = bundle?.loadNibNamed("KALoggerDetails_TableViewCell", owner: self, options: nil)
                 if (nib?.count)! > 0 {
                     cell = nib?[0] as? KALoggerDetails_TableViewCell
                 }
@@ -176,7 +176,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                 break
             case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.viewMySrDetailLink:
                 cell?.subTitleLabel.text = AdminSettingsConstants.adminStringConstants.notApplicable
-                if let basePath = UserDefaults.standard.value(forKey: "templateURL") as? String, let viewMySrDetailUrl = UserDefaults.standard.value(forKey: userDefaultsKey) as? String
+                if let basePath = UserDefaults.standard.value(forKey: AdminSettingsConstants.UniqueKeyConstants.templateURL) as? String, let viewMySrDetailUrl = UserDefaults.standard.value(forKey: userDefaultsKey) as? String
                     {
                     let localFilePath = String(format: AdminSettingsConstants.adminStringConstants.templateURLAppendString, basePath, viewMySrDetailUrl)
                     cell?.subTitleLabel.text = localFilePath
@@ -190,7 +190,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                 break
             case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateLink:
                 cell?.subTitleLabel.text = AdminSettingsConstants.adminStringConstants.notApplicable
-                if let basePath = UserDefaults.standard.value(forKey: "templateURL") as? String, let viewMySrDetailUrl = UserDefaults.standard.value(forKey: userDefaultsKey) as? String {
+                if let basePath = UserDefaults.standard.value(forKey: AdminSettingsConstants.UniqueKeyConstants.templateURL) as? String, let viewMySrDetailUrl = UserDefaults.standard.value(forKey: userDefaultsKey) as? String {
                     let localFilePath = String(format: AdminSettingsConstants.adminStringConstants.templateURLAppendString, basePath, viewMySrDetailUrl)
                     cell?.subTitleLabel.text = localFilePath
                 }

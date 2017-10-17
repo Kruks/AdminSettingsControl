@@ -10,13 +10,14 @@ import UIKit
 
 public struct AdminSettingsConstants  {
     
-    static let adminBundleID = "org.cocoapods.AdminSettingsControl"
+    public static let adminBundleID = "org.cocoapods.AdminSettingsControl"
     
-    enum UniqueKeyConstants {
+    public enum UniqueKeyConstants {
         static let enableDeviceLogs = "EnableDeviceLogs"
         static let enableProfileLogs = "EnableProfileLogs"
-        static let titleKey = "title"
-        static let userDefaultsKey = "key"
+        public static let titleKey = "title"
+        public static let userDefaultsKey = "key"
+        public static let templateURL = "templateURL"
     }
     
     enum adminStringConstants {
@@ -32,20 +33,21 @@ public struct AdminSettingsConstants  {
     }
     
     public enum SettingTableViewOtherDetialsCellIdentifier {
-        static let logCampId = "Logcamp App ID"
-        static let deviceId = "Device ID"
-        static let appVersion = "App Version"
-        static let pushNotification = "Push notification token"
-        static let profileLog = "Enable profile log"
-        static let deviceLog = "Enable device log"
-        static let emailData = "Email Data"
-        static let viewMySrDetailLink = "View My SR Detail URL"
-        static let createSrTemplateLink = "Create SR Template URL"
-        static let viewMySrDetailVer = "View My SR Detail Version"
-        static let createSrTemplateVer = "Create SR Template Version"
-        static let serverURLTitle = "Server URL"
-        static let loginServerURLTitle = "Login Server URL"
-        static let templateURLTitle = "Template URL"
+        public static let logCampId = "Logcamp App ID"
+        public static let deviceId = "Device ID"
+        public  static let appVersion = "App Version"
+        public static let pushNotification = "Push notification token"
+        public static let profileLog = "Enable profile log"
+        public static let deviceLog = "Enable device log"
+        public static let emailData = "Email Data"
+        public static let viewMySrDetailLink = "View My SR Detail URL"
+        public static let createSrTemplateLink = "Create SR Template URL"
+        public static let viewMySrDetailVer = "View My SR Detail Version"
+        public static let createSrTemplateVer = "Create SR Template Version"
+        public static let serverURLTitle = "Server URL"
+        public  static let loginServerURLTitle = "Login Server URL"
+        public static let templateURLTitle = "Template URL"
+        public static let navigationTitle = "Settings"
         
     }
 }
