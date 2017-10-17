@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ServerURL_TableViewCell" customModule="AdminSettingsPodCode" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ServerURL_TableViewCell" rowHeight="60" id="sK6-R8-bGp" customClass="ServerURL_TableViewCell" customModule="AdminSettingsPodCode" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sK6-R8-bGp" id="vvr-K6-4T3">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="luJ-oy-Z7H" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
+                        <rect key="frame" x="25" y="10" width="331" height="39"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.18823529410000001" green="0.074509803920000006" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Email"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="selectedTitle" value="Email"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="title" value="Email"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="lineHeight">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="selectedLineHeight">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                <color key="value" red="0.3411764706" green="0.20784313730000001" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                <color key="value" red="0.3411764706" green="0.20784313730000001" blue="0.50588235290000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="luJ-oy-Z7H" firstAttribute="top" secondItem="vvr-K6-4T3" secondAttribute="topMargin" constant="2" id="3lM-b2-e3x"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="luJ-oy-Z7H" secondAttribute="trailing" constant="11" id="4Z4-0E-5P6"/>
+                    <constraint firstItem="luJ-oy-Z7H" firstAttribute="leading" secondItem="vvr-K6-4T3" secondAttribute="leadingMargin" constant="17" id="MSv-FZ-dGa"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="luJ-oy-Z7H" secondAttribute="bottom" constant="2" id="rXA-65-wcl"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="serverURLTextField" destination="luJ-oy-Z7H" id="ErR-Ht-03A"/>
+            </connections>
+            <point key="canvasLocation" x="-140" y="-55"/>
+        </tableViewCell>
+    </objects>
+</document>
