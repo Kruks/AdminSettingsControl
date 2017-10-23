@@ -2,7 +2,7 @@
 
 ![LogCamp](http://www.kahuna-mobihub.com/templates/ja_puresite/images/logo-trans.png)
 
-FindViewControl is written in Swift
+AdminSettingsControl is written in Swift
 
 ## Installation
 
@@ -51,7 +51,7 @@ Firstly create an array with 2 sections, one for configurable URLs used in app &
 
 
 // Finally for navigation to admin settings screen write below code:-
-\\ parameter required are adminArray(the array with two section that we created in above code) & navigation controller instance
+// parameter required are adminArray(the array with two section that we created in above code) & navigation controller instance
 _ = AdminSettingsControl.init(adminArray: [rowInSectionFirstArray, rowInSectionSecondArray], navigationController: self.navigationController!)
 
 
