@@ -34,7 +34,7 @@ Firstly create an array with 2 sections, one for configurable URLs used in app &
         rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.deviceId, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "deviceId"])
         // App version row
         rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.appVersion, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "appVersion"])
-        // Push Notification Row. Here pas, user default key of push Notification
+        // Push Notification Row. Here pass, user default key of push Notification
         rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.pushNotification, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "pushNotification"])
         // Profile log Switch Row
         rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.profileLog, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "profileLog"])
