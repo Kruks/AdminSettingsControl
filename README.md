@@ -54,5 +54,5 @@ Firstly create an array with 2 sections, one for configurable URLs used in app &
 // parameter required are adminArray(the array with two section that we created in above code) & navigation controller instance
 _ = AdminSettingsControl.init(adminArray: [rowInSectionFirstArray, rowInSectionSecondArray], navigationController: self.navigationController!)
 
-
-
+```
+Note:- store template URL object with key "templateURL", also viewMySrDetailLink & createSrTemplateLink must be store in userdefaults like other URLs
