@@ -40,12 +40,12 @@ Firstly create an array with 2 sections, one for configurable URLs used in app &
         rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.profileLog, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "profileLog"])
         //Device Log Switch ROw
         rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.deviceLog, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "deviceLog"])
-        //viewMySrDetailLink Row. Here pass user default key for viewMySrDetailLink
-        rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.viewMySrDetailLink, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "viewMySrDetailLink"])
+        //viewMySrDetailLink Row. Here pass viewMySrDetailLink value in key
+        rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.viewMySrDetailLink, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "viewDetails.html"])
         //viewMySrDetailVersion Row. Here pass user default key for viewMySrDetailVer
         rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.viewMySrDetailVer, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "viewMySrDetailVer"])
-        //createSrTemplateLink Row. Here pass user default key for createSrTemplateLink
-        rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateLink, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "createSrTemplateLink"])
+        //createSrTemplateLink Row. Here pass createSrTemplateLink value in key
+        rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateLink, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "index.html"])
         //createSrTemplateVer Row. Here pass user default key for createSrTemplateVer
         rowInSectionSecondArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateVer, AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: "createSrTemplateVer"])
 
