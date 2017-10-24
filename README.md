@@ -2,7 +2,7 @@
 
 ![LogCamp](http://www.kahuna-mobihub.com/templates/ja_puresite/images/logo-trans.png)
 
-AdminSettingsControl is written in Swift
+AdminSettingsControl is written in Swift 3
 
 ## Installation
 
