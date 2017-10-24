@@ -16,7 +16,13 @@ AdminSettingsControl is written in Swift 3
 
 
 ### Swift Code to navigate to admin Settings screen:
-Firstly create an array with 2 sections, one for configurable URLs used in app & second to display other details like logcampID & other details.
+
+Import pod AdminSettingsControl
+```swift
+import AdminSettingsControl
+
+```
+Create an array with 2 sections, one for configurable URLs used in app & second to display other details like logcampID & other details.
 
 ```swift
  // For Admin Settings View pass 2 sections in array, 1st for all the server URLs & 2nd section for other details like Push Notification Token
