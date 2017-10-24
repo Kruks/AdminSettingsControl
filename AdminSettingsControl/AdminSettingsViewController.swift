@@ -22,6 +22,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     var kaEnableDeviceLogs: Bool = true
     //Array which states Number of Sections and number of rows in each section
     public var section_row_Details_Array: NSMutableArray = NSMutableArray()
+    //To store Updated URLs
     var serverURLsUpdatedDictArray = [[String: String]]()
     let userDefault = UserDefaults.standard
     let templateURLKey: String! = ""
@@ -43,10 +44,12 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     */
     override public func viewDidLoad() {
         super.viewDidLoad()
-
+        //Set kaEnableProfileLogs from userdefaults value
         if let profileLog = userDefault.value(forKey: AdminSettingsConstants.UniqueKeyConstants.enableDeviceLogs) as? Bool {
             kaEnableProfileLogs = profileLog
         }
+        
+        //Set kaEnableDeviceLogs from userdefaults value
         if let deviceLog = userDefault.value(forKey: AdminSettingsConstants.UniqueKeyConstants.enableProfileLogs) as? Bool {
             kaEnableDeviceLogs = deviceLog
         }
@@ -66,6 +69,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         self.setDoneButton()
     }
 
+    //MARK:- Set Save Button on navigation bar
     func setDoneButton() {
         let hmBtn = UIButton()
         hmBtn.frame = CGRect(x: 0, y: 0, width: 71, height: 30)
@@ -176,9 +180,8 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                 break
             case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.viewMySrDetailLink:
                 cell?.subTitleLabel.text = AdminSettingsConstants.adminStringConstants.notApplicable
-                if let basePath = UserDefaults.standard.value(forKey: AdminSettingsConstants.UniqueKeyConstants.templateURL) as? String, let viewMySrDetailUrl = UserDefaults.standard.value(forKey: userDefaultsKey) as? String
-                    {
-                    let localFilePath = String(format: AdminSettingsConstants.adminStringConstants.templateURLAppendString, basePath, viewMySrDetailUrl)
+                if let basePath = UserDefaults.standard.value(forKey: AdminSettingsConstants.UniqueKeyConstants.templateURL) as? String {
+                    let localFilePath = String(format: AdminSettingsConstants.adminStringConstants.templateURLAppendString, basePath, userDefaultsKey)
                     cell?.subTitleLabel.text = localFilePath
 
                 }
@@ -190,8 +193,8 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                 break
             case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateLink:
                 cell?.subTitleLabel.text = AdminSettingsConstants.adminStringConstants.notApplicable
-                if let basePath = UserDefaults.standard.value(forKey: AdminSettingsConstants.UniqueKeyConstants.templateURL) as? String, let viewMySrDetailUrl = UserDefaults.standard.value(forKey: userDefaultsKey) as? String {
-                    let localFilePath = String(format: AdminSettingsConstants.adminStringConstants.templateURLAppendString, basePath, viewMySrDetailUrl)
+                if let basePath = UserDefaults.standard.value(forKey: AdminSettingsConstants.UniqueKeyConstants.templateURL) as? String {
+                    let localFilePath = String(format: AdminSettingsConstants.adminStringConstants.templateURLAppendString, basePath, userDefaultsKey)
                     cell?.subTitleLabel.text = localFilePath
                 }
                 break

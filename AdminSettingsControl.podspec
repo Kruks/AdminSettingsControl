@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "AdminSettingsControl"
-  s.version      = "1.0.3"
+  s.version      = "1.0.4"
   s.summary      = "AdminSettingsControl for Admin Settings screen"
   s.description  = "AdminSettingsControl is used t9o display app & device specific Info i.e server URLs, App version, device ID etc."
   s.homepage     = "https://github.com/Kruks/AdminSettingsControl/blob/master/README.md"

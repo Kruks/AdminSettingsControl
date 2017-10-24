@@ -11,6 +11,8 @@ import UIKit
 
 public class AdminSettingsControl {
 
+    
+    //MARK:- Initialize AdminSettingsViewController
     public init(adminArray: NSMutableArray, navigationController: UINavigationController) {
         let bundle = Bundle(identifier: AdminSettingsConstants.adminBundleID)
         let adminVC = AdminSettingsViewController(nibName: AdminSettingsConstants.UniqueKeyConstants.adminSettingsXibName, bundle: bundle)
