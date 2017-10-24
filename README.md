@@ -11,7 +11,7 @@ AdminSettingsControl is written in Swift
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. 
 
 ```ruby
- pod 'AdminSettingsControl', :git => 'https://github.com/Kruks/AdminSettingsControl.git', :tag => '1.0.3'
+ pod 'AdminSettingsControl', :git => 'https://github.com/Kruks/AdminSettingsControl.git', :tag => '1.0.4'
 ```
 
 
