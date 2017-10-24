@@ -62,4 +62,4 @@ Create an array with 2 sections, one for configurable URLs used in app & second 
 _ = AdminSettingsControl.init(adminArray: [rowInSectionFirstArray, rowInSectionSecondArray], navigationController: self.navigationController!)
 
 ```
-Note:- store template URL object with key "templateURL"
+Note:- Store template URL object with key "templateURL" to display the URL for JS template page, if this value is not set in userDefaults it will display Create SR & View Details template URL as N/A
