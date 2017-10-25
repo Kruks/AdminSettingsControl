@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Google
 import GoogleSignIn
 import GoogleAPIClientForREST
 import YLProgressBar
@@ -35,7 +34,7 @@ extension AdminSettingsViewController {
             service.authorizer = user.authentication.fetcherAuthorizer()
             let sharedInstance = GoogleDriveUploadFile.shareInstance
             let appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String
-            var folderName = "\(appName)_DBBackUp_".appending(Utils.convertFromDate(date: Date()))
+            var folderName = "\(appName)_DBBackUp_".appending(self.convertFromDate(date: Date()))
             folderName = folderName.replacingOccurrences(of: " ", with: "_")
             sharedInstance.createFolder(service, folderName: folderName, callback: responseFolderFromDrive)
         }
@@ -146,5 +145,12 @@ extension AdminSettingsViewController {
     
     @IBAction func cancelProgressBarButtonClicked(_ sender: UIButton) {
         MBProgressHUD.hide(for: self.view, animated: true)
+    }
+    
+    func convertFromDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy HH:mm:ss"
+        let stringDate = dateFormatter.string(from: date)
+        return stringDate
     }
 }
