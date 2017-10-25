@@ -8,7 +8,6 @@
 
 import Foundation
 import GoogleAPIClientForREST
-import Google
 
 class GoogleDriveUploadFile: NSObject {
 
