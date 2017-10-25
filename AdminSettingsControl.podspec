@@ -16,8 +16,5 @@ Pod::Spec.new do |s|
   s.dependency 'GoogleAPIClientForREST/Drive', '~> 1.2.1'
   s.dependency 'Google/SignIn', '~> 3.0.3'
   s.dependency 'YLProgressBar', '~> 3.8.1'
-  s.pod_target_xcconfig = {
-    'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/Google',
-    'OTHER_LDFLAGS' => '$(inherited) -undefined dynamic_lookup -ObjC'
-  }
+
 end
