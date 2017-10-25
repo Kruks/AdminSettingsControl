@@ -2,7 +2,7 @@
 
 ![LogCamp](http://www.kahuna-mobihub.com/templates/ja_puresite/images/logo-trans.png)
 
-AdminSettingsControl is written in Swift
+AdminSettingsControl is written in Swift 3
 
 ## Installation
 
@@ -16,7 +16,13 @@ AdminSettingsControl is written in Swift
 
 
 ### Swift Code to navigate to admin Settings screen:
-Firstly create an array with 2 sections, one for configurable URLs used in app & second to display other details like logcampID & other details.
+
+Import pod AdminSettingsControl
+```swift
+import AdminSettingsControl
+
+```
+Create an array with 2 sections, one for configurable URLs used in app & second to display other details like logcampID & other details.
 
 ```swift
  // For Admin Settings View pass 2 sections in array, 1st for all the server URLs & 2nd section for other details like Push Notification Token
@@ -56,4 +62,4 @@ Firstly create an array with 2 sections, one for configurable URLs used in app &
 _ = AdminSettingsControl.init(adminArray: [rowInSectionFirstArray, rowInSectionSecondArray], navigationController: self.navigationController!)
 
 ```
-Note:- store template URL object with key "templateURL", also viewMySrDetailLink & createSrTemplateLink must be stored in userdefaults like other URLs
+Note:- Store template URL object with key "templateURL" to display the URL for JS template page, if this value is not set in userDefaults it will display Create SR & View Details template URL as N/A
