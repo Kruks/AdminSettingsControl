@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "AdminSettingsControl"
-  s.version      = "1.0.10"
+  s.version      = "1.0.11"
   s.summary      = "AdminSettingsControl for Admin Settings screen"
   s.description  = "AdminSettingsControl is used to display app & device specific Info i.e server URLs, App version, device ID etc."
   s.homepage     = "https://github.com/Kruks/AdminSettingsControl/blob/master/README.md"
@@ -18,8 +18,7 @@ Pod::Spec.new do |s|
   s.dependency 'YLProgressBar', '~> 3.8.1'
   s.pod_target_xcconfig = {
     'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/GoogleSignIn',
-    'LIBRARY_SEARCH_PATHS' => "$(inherited) $(PODS_ROOT)/Pods/GoogleSignIn/",
-    'OTHER_LDFLAGS' => '$(inherited) -undefined dynamic_lookup -ObjC'
+    'LIBRARY_SEARCH_PATHS' => "$(inherited) $(PODS_ROOT)/GoogleSignIn/",
   }
   s.xcconfig = {'LIBRARY_SEARCH_PATHS' => "$(SRCROOT)/Pods/GoogleSignIn/"}
 end

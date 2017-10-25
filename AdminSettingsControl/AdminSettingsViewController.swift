@@ -12,6 +12,19 @@ import GoogleSignIn
 import GoogleAPIClientForREST
 import YLProgressBar
 import MBProgressHUD
+import SkyFloatingLabelTextField
+
+class KALoggerDetails_TableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
+    @IBOutlet weak var switchControl: UISwitch!
+}
+
+class ServerURL_TableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var serverURLTextField: SkyFloatingLabelTextField!
+}
 
 enum SwitchControlTag {
     static let profileLog = 1
@@ -57,6 +70,11 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     */
     override public func viewDidLoad() {
         super.viewDidLoad()
+        if (self.navigationController?.isNavigationBarHidden)! {
+            self.navigationController?.isNavigationBarHidden = false
+            self.navigationController?.navigationBar.backgroundColor = UIColor.black
+        }
+        
         //Set kaEnableProfileLogs from userdefaults value
         if let profileLog = userDefault.value(forKey: AdminSettingsConstants.UniqueKeyConstants.enableDeviceLogs) as? Bool {
             kaEnableProfileLogs = profileLog
@@ -234,7 +252,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
             } else if title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.viewMySrDetailLink || title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateLink {
                 return CGFloat(AdminScreenRowHeight.templateDetailsURLHeight)
             }  else if title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.uploadtoDriveTitle {
-                return CGFloat(AdminScreenRowHeight.uploadDriveCellHeight)
+                return CGFloat(AdminScreenRowHeight.switchLogsCellHeight)
             }
             return CGFloat(AdminScreenRowHeight.defaultHeight)
         }
