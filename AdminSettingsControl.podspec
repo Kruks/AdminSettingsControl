@@ -21,5 +21,5 @@ Pod::Spec.new do |s|
     'LIBRARY_SEARCH_PATHS' => "$(inherited) $(PODS_ROOT)/Pods/GoogleSignIn/",
     'OTHER_LDFLAGS' => '$(inherited) -undefined dynamic_lookup -ObjC'
   }
-  s.xcconfig = {'LIBRARY_SEARCH_PATHS' => "$(SRCROOT)/Pods/GoogleSignIn/"
+  s.xcconfig = {'LIBRARY_SEARCH_PATHS' => "$(SRCROOT)/Pods/GoogleSignIn/"}
 end
