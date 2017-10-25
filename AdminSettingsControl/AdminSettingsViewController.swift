@@ -8,13 +8,17 @@
 
 import UIKit
 import MessageUI
+import GoogleSignIn
+import GoogleAPIClientForREST
+import YLProgressBar
+import MBProgressHUD
 
 enum SwitchControlTag {
     static let profileLog = 1
     static let deviceLog = 2
 }
 
-public class AdminSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, UITextFieldDelegate {
+public class AdminSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate  {
 
     @IBOutlet weak var settingsTableView: UITableView!
     let headerHeight: CGFloat = 40
@@ -22,10 +26,18 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     var kaEnableDeviceLogs: Bool = true
     //Array which states Number of Sections and number of rows in each section
     public var section_row_Details_Array: NSMutableArray = NSMutableArray()
+    var emailRecipients = [String]()
+    var dbName: String!
     //To store Updated URLs
     var serverURLsUpdatedDictArray = [[String: String]]()
     let userDefault = UserDefaults.standard
     let templateURLKey: String! = ""
+    var service: GTLRDriveService = GTLRDriveService()
+    var dbUploadFileCounter = 0
+    var totalDBUploadFileCounter = 3
+    var ylProgress: YLProgressBar!
+    var hud: MBProgressHUD!
+    var customIndicatorLabel: UILabel!
 
     enum AdminTableSection {
         static let ServerURLSection = 0
@@ -37,6 +49,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         static let defaultHeight = 91.0
         static let switchLogsCellHeight = 55.0
         static let templateDetailsURLHeight = 100.0
+        static let uploadDriveCellHeight = 40.0
     }
 
     /**
@@ -198,11 +211,8 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                     cell?.subTitleLabel.text = localFilePath
                 }
                 break
-            case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateVer:
-                cell?.subTitleLabel.text = AdminSettingsConstants.adminStringConstants.notApplicable
-                if let version = UserDefaults.standard.object(forKey: userDefaultsKey) as? String {
-                    cell?.subTitleLabel.text = version
-                }
+            case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.uploadtoDriveTitle:
+                cell?.subTitleLabel.text = ""
                 break
             default:
                 break
@@ -221,9 +231,10 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
             let title = dict[AdminSettingsConstants.UniqueKeyConstants.titleKey] as? String
             if title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.profileLog || title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.deviceLog {
                 return CGFloat(AdminScreenRowHeight.switchLogsCellHeight)
-            }
-            if title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.viewMySrDetailLink || title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateLink {
+            } else if title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.viewMySrDetailLink || title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateLink {
                 return CGFloat(AdminScreenRowHeight.templateDetailsURLHeight)
+            }  else if title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.uploadtoDriveTitle {
+                return CGFloat(AdminScreenRowHeight.uploadDriveCellHeight)
             }
             return CGFloat(AdminScreenRowHeight.defaultHeight)
         }
@@ -248,6 +259,19 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         }
         headerView.addSubview(headerLabel)
         return headerView
+    }
+    
+    //MARK:- TableView Delegate Method
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == AdminTableSection.OtherDetailsSection {
+            let array = self.section_row_Details_Array[indexPath.section] as! NSArray
+            let dict = array[indexPath.row] as! NSDictionary
+            let title = dict[AdminSettingsConstants.UniqueKeyConstants.titleKey] as! String
+            
+            if title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.uploadtoDriveTitle {
+                self.uploadDBClickedToDrive()
+            }
+        }
     }
 
     //MARK:- Enable/ disable Logs Method
@@ -287,6 +311,19 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         if let userDefaultsKey = dict[AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey] as? String {
             serverURLsUpdatedDictArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: textField.text ?? "", AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: userDefaultsKey])
         }
+    }
+    
+    // MARK: - Show Simple Alert with Title and message
+    public func showSimpleAlertWith(title: String, messageToShow message: String) {
+        let alertView = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: AdminSettingsConstants.StaticAppMessages.alertOkTitle, style: .default, handler: nil)
+        alertView.addAction(action)
+        self.present(alertView, animated: true, completion: nil)
+    }
+
+    // MARK: - Upload to Drive Clicked
+    func uploadDBClickedToDrive() {
+        self.setGoogleDriveScope()
     }
 
 }

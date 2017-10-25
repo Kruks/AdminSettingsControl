@@ -29,7 +29,6 @@ public struct AdminSettingsConstants {
 
     enum ColorConstants {
         static let lightGrayBorderColor = UIColor(red: 248.0 / 255.0, green: 248.0 / 255.0, blue: 248.0 / 255.0, alpha: 1.0)
-
     }
 
     public enum SettingTableViewOtherDetialsCellIdentifier {
@@ -48,6 +47,17 @@ public struct AdminSettingsConstants {
         public static let loginServerURLTitle = "Login Server URL"
         public static let templateURLTitle = "Template URL"
         public static let navigationTitle = "Settings"
+        public static let uploadtoDriveTitle = "Upload DB To Drive"
+    }
+    
+    enum StaticAppMessages {
+        // Upload To Google Drive Text
+        static let creatingDBText = "Creating DBBackup folder in your drive"
+        static let uploadingDBText = "Uploading DBBackup in your drive"
+        static let sharingFileToUsers = "Sharing DBBackup to developers"
+        static let uploadingText = "Uploading Image"
+        static let alertOkTitle = "OK"
 
     }
+
 }
