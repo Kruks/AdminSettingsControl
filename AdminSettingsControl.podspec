@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "AdminSettingsControl"
-  s.version      = "1.0.13"
+  s.version      = "1.0.14"
   s.summary      = "AdminSettingsControl for Admin Settings screen"
   s.description  = "AdminSettingsControl is used to display app & device specific Info i.e server URLs, App version, device ID etc."
   s.homepage     = "https://github.com/Kruks/AdminSettingsControl/blob/master/README.md"
@@ -20,5 +20,5 @@ Pod::Spec.new do |s|
     'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/GoogleSignIn/Frameworks/',
     'LIBRARY_SEARCH_PATHS' => "$(inherited) $(PODS_ROOT)/GoogleSignIn/Frameworks/",
   }
-  s.xcconfig = {'LIBRARY_SEARCH_PATHS' => "$(SRCROOT)/Pods/GoogleSignIn/"}
+  s.xcconfig = {'LIBRARY_SEARCH_PATHS' => "$(SRCROOT)/GoogleSignIn/"}
 end
