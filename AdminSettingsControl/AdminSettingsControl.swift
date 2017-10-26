@@ -8,10 +8,8 @@
 
 import UIKit
 
-
 public class AdminSettingsControl {
 
-    
     //MARK:- Initialize AdminSettingsViewController
     public init(adminArray: NSMutableArray, navigationController: UINavigationController) {
         let bundle = Bundle(identifier: AdminSettingsConstants.adminBundleID)
@@ -21,14 +19,16 @@ public class AdminSettingsControl {
     }
     
     //MARK:- Initialize AdminSettingsViewController
-    public init(adminArray: NSMutableArray, navigationController: UINavigationController, dbName: String, recipientsEmailAddressList: [String]) {
+    public init(adminArray: NSMutableArray, navigationController: UINavigationController, dbName: String, recipientsEmailAddressList: [String], googleClientID: String) {
         let bundle = Bundle(identifier: AdminSettingsConstants.adminBundleID)
         let adminVC = AdminSettingsViewController(nibName: AdminSettingsConstants.UniqueKeyConstants.adminSettingsXibName, bundle: bundle)
         adminVC.section_row_Details_Array = adminArray
         adminVC.dbName = dbName
         adminVC.emailRecipients = recipientsEmailAddressList
+        adminVC.googleClientID = googleClientID;
         navigationController.pushViewController(adminVC, animated: true)
     }
+
 
     
 }

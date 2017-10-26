@@ -39,8 +39,9 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     var kaEnableDeviceLogs: Bool = true
     //Array which states Number of Sections and number of rows in each section
     public var section_row_Details_Array: NSMutableArray = NSMutableArray()
-    var emailRecipients = [String]()
-    var dbName: String!
+    public var emailRecipients = [String]()
+    public var dbName: String!
+    public var googleClientID: String!
     //To store Updated URLs
     var serverURLsUpdatedDictArray = [[String: String]]()
     let userDefault = UserDefaults.standard
@@ -51,6 +52,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     var ylProgress: YLProgressBar!
     var hud: MBProgressHUD!
     var customIndicatorLabel: UILabel!
+    
 
     enum AdminTableSection {
         static let ServerURLSection = 0
@@ -343,5 +345,14 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     func uploadDBClickedToDrive() {
         self.setGoogleDriveScope()
     }
-
+    
+    // MARK: - handle Google SignIn
+    public func handleGoogleSignin(_ url: URL, with options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+        if #available(iOS 9.0, *) {
+            return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation] ?? "")
+        } else {
+            // Fallback on earlier versions
+            return true
+        }
+    }
 }

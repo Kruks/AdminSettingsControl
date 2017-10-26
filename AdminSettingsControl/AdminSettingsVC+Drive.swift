@@ -18,7 +18,7 @@ extension AdminSettingsViewController {
         let signIn = GIDSignIn.sharedInstance()
         signIn?.delegate = self
         signIn?.uiDelegate = self
-        signIn?.clientID = "865909050089-ebqvldbo8qiu5uejp2gsc22bmhunt4ja.apps.googleusercontent.com"
+        signIn?.clientID = googleClientID
         var scopes = [String]()
         scopes.append(kGTLRAuthScopeDrive)
         signIn?.scopes = scopes
@@ -154,4 +154,6 @@ extension AdminSettingsViewController {
         let stringDate = dateFormatter.string(from: date)
         return stringDate
     }
+    
+ 
 }
