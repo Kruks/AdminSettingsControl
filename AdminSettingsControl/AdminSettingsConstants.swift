@@ -49,7 +49,7 @@ public struct AdminSettingsConstants {
         public static let navigationTitle = "Settings"
         public static let uploadtoDriveTitle = "Upload DB To Drive"
     }
-    
+
     enum StaticAppMessages {
         // Upload To Google Drive Text
         static let creatingDBText = "Creating DBBackup folder in your drive"

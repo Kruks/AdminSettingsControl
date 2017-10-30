@@ -8,21 +8,17 @@
 
 import UIKit
 import MessageUI
-import GoogleSignIn
-import GoogleAPIClientForREST
-import YLProgressBar
-import MBProgressHUD
 import SkyFloatingLabelTextField
 
 class KALoggerDetails_TableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var switchControl: UISwitch!
 }
 
 class ServerURL_TableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var serverURLTextField: SkyFloatingLabelTextField!
 }
 
@@ -31,7 +27,7 @@ enum SwitchControlTag {
     static let deviceLog = 2
 }
 
-public class AdminSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, UITextFieldDelegate, GIDSignInDelegate, GIDSignInUIDelegate  {
+public class AdminSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var settingsTableView: UITableView!
     let headerHeight: CGFloat = 40
@@ -39,20 +35,10 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     var kaEnableDeviceLogs: Bool = true
     //Array which states Number of Sections and number of rows in each section
     public var section_row_Details_Array: NSMutableArray = NSMutableArray()
-    public var emailRecipients = [String]()
-    public var dbName: String!
-    public var googleClientID: String!
     //To store Updated URLs
     var serverURLsUpdatedDictArray = [[String: String]]()
     let userDefault = UserDefaults.standard
     let templateURLKey: String! = ""
-    var service: GTLRDriveService = GTLRDriveService()
-    var dbUploadFileCounter = 0
-    var totalDBUploadFileCounter = 3
-    var ylProgress: YLProgressBar!
-    var hud: MBProgressHUD!
-    var customIndicatorLabel: UILabel!
-    
 
     enum AdminTableSection {
         static let ServerURLSection = 0
@@ -69,19 +55,19 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
 
     /**
      Here enableProfileLog, enableDeviceLog, serverUrl ,LoginServerUrl values are set
-    */
+     */
     override public func viewDidLoad() {
         super.viewDidLoad()
         if (self.navigationController?.isNavigationBarHidden)! {
             self.navigationController?.isNavigationBarHidden = false
             self.navigationController?.navigationBar.backgroundColor = UIColor.black
         }
-        
+
         //Set kaEnableProfileLogs from userdefaults value
         if let profileLog = userDefault.value(forKey: AdminSettingsConstants.UniqueKeyConstants.enableDeviceLogs) as? Bool {
             kaEnableProfileLogs = profileLog
         }
-        
+
         //Set kaEnableDeviceLogs from userdefaults value
         if let deviceLog = userDefault.value(forKey: AdminSettingsConstants.UniqueKeyConstants.enableProfileLogs) as? Bool {
             kaEnableDeviceLogs = deviceLog
@@ -95,7 +81,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
 
     /**
      Navigation bar title is set
-    */
+     */
     override public func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.navigationTitle
@@ -127,7 +113,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         if self.section_row_Details_Array.count > 0 {
             return self.section_row_Details_Array.count
         }
-        return 1
+        return 0
 
     }
 
@@ -137,10 +123,10 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let array = self.section_row_Details_Array[indexPath.section] as! NSArray
-        let dict = array[indexPath.row] as! NSDictionary
-        let title = dict[AdminSettingsConstants.UniqueKeyConstants.titleKey] as! String
-        let userDefaultsKey = dict[AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey] as! String
+        let array = self.section_row_Details_Array[indexPath.section] as? NSArray
+        let dict = array?[indexPath.row] as? NSDictionary
+        let title: String = dict?[AdminSettingsConstants.UniqueKeyConstants.titleKey] as? String ?? ""
+        let userDefaultsKey: String = dict?[AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey] as? String ?? ""
         let bundle = Bundle(identifier: AdminSettingsConstants.adminBundleID)
         if indexPath.section == AdminTableSection.ServerURLSection {
             let cellIdentifier = "ServerURL_TableViewCell"
@@ -231,10 +217,8 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                     cell?.subTitleLabel.text = localFilePath
                 }
                 break
-            case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.uploadtoDriveTitle:
-                cell?.subTitleLabel.text = ""
-                break
             default:
+                cell?.subTitleLabel.text = userDefaultsKey
                 break
             }
             return cell!
@@ -246,15 +230,13 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         if indexPath.section == AdminTableSection.ServerURLSection {
             return CGFloat(AdminScreenRowHeight.textFieldCellHeight)
         } else {
-            let array = self.section_row_Details_Array[indexPath.section] as! NSArray
-            let dict = array[indexPath.row] as! NSDictionary
-            let title = dict[AdminSettingsConstants.UniqueKeyConstants.titleKey] as? String
+            let array = self.section_row_Details_Array[indexPath.section] as? NSArray
+            let dict = array?[indexPath.row] as? NSDictionary
+            let title = dict?[AdminSettingsConstants.UniqueKeyConstants.titleKey] as? String ?? ""
             if title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.profileLog || title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.deviceLog {
                 return CGFloat(AdminScreenRowHeight.switchLogsCellHeight)
             } else if title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.viewMySrDetailLink || title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateLink {
                 return CGFloat(AdminScreenRowHeight.templateDetailsURLHeight)
-            }  else if title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.uploadtoDriveTitle {
-                return CGFloat(AdminScreenRowHeight.switchLogsCellHeight)
             }
             return CGFloat(AdminScreenRowHeight.defaultHeight)
         }
@@ -280,19 +262,6 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         headerView.addSubview(headerLabel)
         return headerView
     }
-    
-    //MARK:- TableView Delegate Method
-    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == AdminTableSection.OtherDetailsSection {
-            let array = self.section_row_Details_Array[indexPath.section] as! NSArray
-            let dict = array[indexPath.row] as! NSDictionary
-            let title = dict[AdminSettingsConstants.UniqueKeyConstants.titleKey] as! String
-            
-            if title == AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.uploadtoDriveTitle {
-                self.uploadDBClickedToDrive()
-            }
-        }
-    }
 
     //MARK:- Enable/ disable Logs Method
     @IBAction func On_SwitchValueChange(_ sender: UISwitch) {
@@ -309,7 +278,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     //MARK:- Save Button Click
     /**
      Sets ServerURL and UserServerUrl
-    */
+     */
     @IBAction func onSaveButtonClick(_ sender: AnyObject) {
         self.view.endEditing(true)
         // Updating userdefaults with edited data
@@ -326,33 +295,10 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     //MARK:- UITextField Delegate
     public func textFieldDidEndEditing(_ textField: UITextField) {
         // stpring edited urls in array with key value pair
-        let array = self.section_row_Details_Array[0] as! NSArray
-        let dict = array[textField.tag] as! NSDictionary
-        if let userDefaultsKey = dict[AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey] as? String {
+        let array = self.section_row_Details_Array[0] as? NSArray
+        let dict = array?[textField.tag] as? NSDictionary
+        if let userDefaultsKey = dict?[AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey] as? String {
             serverURLsUpdatedDictArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: textField.text ?? "", AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: userDefaultsKey])
-        }
-    }
-    
-    // MARK: - Show Simple Alert with Title and message
-    public func showSimpleAlertWith(title: String, messageToShow message: String) {
-        let alertView = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        let action = UIAlertAction(title: AdminSettingsConstants.StaticAppMessages.alertOkTitle, style: .default, handler: nil)
-        alertView.addAction(action)
-        self.present(alertView, animated: true, completion: nil)
-    }
-
-    // MARK: - Upload to Drive Clicked
-    func uploadDBClickedToDrive() {
-        self.setGoogleDriveScope()
-    }
-    
-    // MARK: - handle Google SignIn
-    public func handleGoogleSignin(_ url: URL, with options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
-        if #available(iOS 9.0, *) {
-            return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!, annotation: options[UIApplicationOpenURLOptionsKey.annotation] ?? "")
-        } else {
-            // Fallback on earlier versions
-            return true
         }
     }
 }
