@@ -217,6 +217,12 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                     cell?.subTitleLabel.text = localFilePath
                 }
                 break
+            case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateLink:
+                cell?.subTitleLabel.text = AdminSettingsConstants.adminStringConstants.notApplicable
+                if let version = UserDefaults.standard.object(forKey: userDefaultsKey) as? String {
+                    cell?.subTitleLabel.text = version
+                }
+                break
             default:
                 cell?.subTitleLabel.text = userDefaultsKey
                 break
