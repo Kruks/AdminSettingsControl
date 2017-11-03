@@ -147,6 +147,8 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                 cell?.serverURLTextField.text = urlValue
             }
             cell?.selectionStyle = .none
+            cell?.serverURLTextField.selectedTitleColor = self.themeColor
+            cell?.serverURLTextField.selectedLineColor = self.themeColor
             return cell!
 
         } else {
@@ -306,4 +308,6 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
             serverURLsUpdatedDictArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: textField.text ?? "", AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: userDefaultsKey])
         }
     }
+    
+
 }
