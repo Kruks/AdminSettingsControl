@@ -11,7 +11,7 @@ AdminSettingsControl is written in Swift 3
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. 
 
 ```ruby
- pod 'AdminSettingsControl', :git => 'https://github.com/Kruks/AdminSettingsControl.git', :tag => '1.0.20'
+ pod 'AdminSettingsControl', :git => 'https://github.com/Kruks/AdminSettingsControl.git', :tag => '1.0.21'
 ```
 
 
@@ -58,8 +58,8 @@ Create an array with 2 sections, one for configurable URLs used in app & second 
 ```
  Finally for navigation to admin settings screen write below code:-
 ```swift
-// parameter required are adminArray(the array with two section that we created in above code) & navigation controller instance
-_ = AdminSettingsControl.init(adminArray: [rowInSectionFirstArray, rowInSectionSecondArray], navigationController: self.navigationController!)
+// parameter required are adminArray(the array with two section that we created in above code) & navigation controller instance. Also pass your theme color.
+_ = AdminSettingsControl.init(adminArray: [rowInSectionFirstArray, rowInSectionSecondArray], navigationController: self.navigationController!, themeColor: UIColor.blue)
 
 ```
 Note:- Store template URL object with key "templateURL" to display the URL for JS template page, if this value is not set in userDefaults it will display Create SR & View Details template URL as N/A
