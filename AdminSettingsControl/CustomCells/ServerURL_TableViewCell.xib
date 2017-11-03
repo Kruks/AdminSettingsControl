@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="luJ-oy-Z7H" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                        <rect key="frame" x="25" y="10" width="331" height="39"/>
+                        <rect key="frame" x="15" y="10" width="346" height="39"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="0.18823529410000001" green="0.074509803920000006" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <userDefinedRuntimeAttributes>
@@ -44,15 +43,15 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="luJ-oy-Z7H" firstAttribute="top" secondItem="vvr-K6-4T3" secondAttribute="topMargin" constant="2" id="3lM-b2-e3x"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="luJ-oy-Z7H" secondAttribute="trailing" constant="11" id="4Z4-0E-5P6"/>
-                    <constraint firstItem="luJ-oy-Z7H" firstAttribute="leading" secondItem="vvr-K6-4T3" secondAttribute="leadingMargin" constant="17" id="MSv-FZ-dGa"/>
+                    <constraint firstAttribute="trailing" secondItem="luJ-oy-Z7H" secondAttribute="trailing" constant="14" id="RlA-yb-Z9G"/>
+                    <constraint firstItem="luJ-oy-Z7H" firstAttribute="leading" secondItem="vvr-K6-4T3" secondAttribute="leading" constant="15" id="e1f-wV-Pw6"/>
                     <constraint firstAttribute="bottomMargin" secondItem="luJ-oy-Z7H" secondAttribute="bottom" constant="2" id="rXA-65-wcl"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="serverURLTextField" destination="luJ-oy-Z7H" id="ErR-Ht-03A"/>
             </connections>
-            <point key="canvasLocation" x="-140" y="-55"/>
+            <point key="canvasLocation" x="-140.5" y="-55"/>
         </tableViewCell>
     </objects>
 </document>

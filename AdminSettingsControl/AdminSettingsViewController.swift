@@ -39,6 +39,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     var serverURLsUpdatedDictArray = [[String: String]]()
     let userDefault = UserDefaults.standard
     let templateURLKey: String! = ""
+    public let themeColor : UIColor!
 
     enum AdminTableSection {
         static let ServerURLSection = 0
@@ -58,10 +59,8 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
      */
     override public func viewDidLoad() {
         super.viewDidLoad()
-        if (self.navigationController?.isNavigationBarHidden)! {
-            self.navigationController?.isNavigationBarHidden = false
-            self.navigationController?.navigationBar.backgroundColor = UIColor.black
-        }
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationController?.navigationBar.backgroundColor = UIColor.themeColor
 
         //Set kaEnableProfileLogs from userdefaults value
         if let profileLog = userDefault.value(forKey: AdminSettingsConstants.UniqueKeyConstants.enableDeviceLogs) as? Bool {
@@ -217,7 +216,7 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                     cell?.subTitleLabel.text = localFilePath
                 }
                 break
-            case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateLink:
+            case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.createSrTemplateVer:
                 cell?.subTitleLabel.text = AdminSettingsConstants.adminStringConstants.notApplicable
                 if let version = UserDefaults.standard.object(forKey: userDefaultsKey) as? String {
                     cell?.subTitleLabel.text = version
@@ -256,9 +255,9 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
         let ViewFrame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: headerHeight)
         let headerView = UIView(frame: ViewFrame)
         headerView.backgroundColor = AdminSettingsConstants.ColorConstants.lightGrayBorderColor
-        let headerLabel = UILabel(frame: CGRect(x: 25, y: 0, width: tableView.frame.size.width - 25, height: headerHeight))
+        let headerLabel = UILabel(frame: CGRect(x: 15, y: 0, width: tableView.frame.size.width - 30, height: headerHeight))
         headerLabel.backgroundColor = UIColor.clear
-        headerLabel.textColor = UIColor.black
+        headerLabel.textColor = UIColor.themeColor
         headerLabel.font = UIFont.boldSystemFont(ofSize: 17.0)
         if section == AdminTableSection.ServerURLSection {
             headerLabel.text = AdminSettingsConstants.adminStringConstants.serverURLSectionTitle
