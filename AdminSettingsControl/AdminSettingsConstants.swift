@@ -57,7 +57,14 @@ public struct AdminSettingsConstants {
         static let sharingFileToUsers = "Sharing DBBackup to developers"
         static let uploadingText = "Uploading Image"
         static let alertOkTitle = "OK"
-
+    }
+    
+    enum headerFontDetails {
+        static let backBtnArrowWidth = 34
+        static let backBtnArrowHeight = 34
+        static let backBtnArrowNegativeSpacer = -10
+        static let saveBtnWidth = 71
+        static let saveBtnHeight = 30
     }
 
 }
