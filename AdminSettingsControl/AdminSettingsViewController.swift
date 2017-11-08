@@ -10,6 +10,7 @@ import UIKit
 import MessageUI
 import SkyFloatingLabelTextField
 
+/******* Custom Cells ********/
 class KALoggerDetails_TableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
@@ -22,9 +23,23 @@ class ServerURL_TableViewCell: UITableViewCell {
     @IBOutlet weak var serverURLTextField: SkyFloatingLabelTextField!
 }
 
+class SSLPinning_SegmentCell: UITableViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+}
+
+/********* Switch Enums ***********/
 enum SwitchControlTag {
     static let profileLog = 1
     static let deviceLog = 2
+}
+
+/********* Segment Enums ***********/
+enum SegmentControlIndex {
+    static let certificatePinning = 0
+    static let publicKeyPinning = 1
+    static let disablePinning = 2
 }
 
 public class AdminSettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate, UITextFieldDelegate {
@@ -239,13 +254,28 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
                     cell?.subTitleLabel.text = version
                 }
                 break
+            case AdminSettingsConstants.SettingTableViewOtherDetialsCellIdentifier.selectSSLPinningType:
+                let segmentCellIdentifier = "SSLPinning_SegmentCell"
+                var segmentCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? SSLPinning_SegmentCell
+                if segmentCell == nil {
+                    segmentCell = SSLPinning_SegmentCell(style: .default, reuseIdentifier: segmentCellIdentifier)
+                    let nib = bundle?.loadNibNamed("SSLPinning_SegmentCell", owner: self, options: nil)
+                    if (nib?.count)! > 0 {
+                        segmentCell = nib?[0] as? SSLPinning_SegmentCell
+                    }
+                }
+                segmentCell?.selectionStyle = .none
+                segmentCell?.titleLabel.text = title
+                segmentCell?.segmentControl.tintColor = self.themeColor
+                segmentCell?.segmentControl.addTarget(self, action: #selector(segmentValueChanged(_:)), for:.valueChanged)
+                segmentCell?.segmentControl.selectedSegmentIndex = self.getSegmentedControlSelectedIndex()
+                return segmentCell!
             default:
                 cell?.subTitleLabel.text = userDefaultsKey
                 break
             }
             return cell!
         }
-
     }
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -317,11 +347,54 @@ public class AdminSettingsViewController: UIViewController, UITableViewDelegate,
     //MARK:- UITextField Delegate
     public func textFieldDidEndEditing(_ textField: UITextField) {
         // stpring edited urls in array with key value pair
-        let array = self.section_row_Details_Array[0] as? NSArray
+        let array = self.section_row_Details_Array.firstObject as? NSArray
         let dict = array?[textField.tag] as? NSDictionary
         if let userDefaultsKey = dict?[AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey] as? String {
             serverURLsUpdatedDictArray.append([AdminSettingsConstants.UniqueKeyConstants.titleKey: textField.text ?? "", AdminSettingsConstants.UniqueKeyConstants.userDefaultsKey: userDefaultsKey])
         }
+    }
+    
+    //MARK:- Get Selected Segment Index
+    func getSegmentedControlSelectedIndex() -> Int {
+        let userDefault = UserDefaults.standard
+
+        if let pinningType = userDefault.object(forKey: AdminSettingsConstants.SSLPinningConstants.pinningTypeKey) as? String{
+            if pinningType == AdminSettingsConstants.SSLPinningConstants.ceritificatePinning {
+                return SegmentControlIndex.certificatePinning;
+            } else if pinningType == AdminSettingsConstants.SSLPinningConstants.publicKeyPinning {
+                return SegmentControlIndex.publicKeyPinning;
+            }
+            return SegmentControlIndex.disablePinning
+        } else {
+            // If No Pinning type is selected, make disable pinning as default
+            userDefault.set(AdminSettingsConstants.SSLPinningConstants.disablePinning, forKey: AdminSettingsConstants.SSLPinningConstants.pinningTypeKey)
+            userDefault.synchronize()
+            return SegmentControlIndex.disablePinning;
+        }
+    }
+    
+    //MARK:- Pinning Type Segment Change
+    @IBAction func segmentValueChanged(_ sender: Any) {
+        let segmentControl: UISegmentedControl = (sender as? UISegmentedControl)!
+        self.setPrevPinningType()
+        let userDefault = UserDefaults.standard
+        var pinningType = AdminSettingsConstants.SSLPinningConstants.disablePinning
+        if segmentControl.selectedSegmentIndex == SegmentControlIndex.certificatePinning {
+            pinningType = AdminSettingsConstants.SSLPinningConstants.ceritificatePinning
+        } else if segmentControl.selectedSegmentIndex == SegmentControlIndex.publicKeyPinning {
+            pinningType = AdminSettingsConstants.SSLPinningConstants.publicKeyPinning
+        }
+        userDefault.set(pinningType, forKey: AdminSettingsConstants.SSLPinningConstants.pinningTypeKey)
+        userDefault.synchronize()
+    }
+    
+    //MARK:- FUNCTION TO Set Prev Pinning Type
+    func setPrevPinningType() {
+        let userDefault = UserDefaults.standard
+        if let pinningType = userDefault.object(forKey: AdminSettingsConstants.SSLPinningConstants.pinningTypeKey) as? String{
+            userDefault.set(pinningType, forKey: AdminSettingsConstants.SSLPinningConstants.prevPinningTypeKey)
+        }
+        userDefault.synchronize()
     }
 
 

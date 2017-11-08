@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SSLPinning_SegmentCell" rowHeight="91" id="IfE-AY-VNJ" customClass="SSLPinning_SegmentCell" customModule="AdminSettingsControl" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IfE-AY-VNJ" id="R7s-8u-2yp">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="vY6-ea-2Us">
+                        <rect key="frame" x="15" y="46" width="345" height="28"/>
+                        <segments>
+                            <segment title="Certificate"/>
+                            <segment title="Public Key"/>
+                            <segment title="None"/>
+                        </segments>
+                        <color key="tintColor" red="0.0078431372550000003" green="0.13725490200000001" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </segmentedControl>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsH-Wr-zkN">
+                        <rect key="frame" x="15" y="17" width="345" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="RCr-oK-Wyg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="zsH-Wr-zkN" secondAttribute="trailing" constant="15" id="5Ct-zZ-zuR"/>
+                    <constraint firstAttribute="bottom" secondItem="vY6-ea-2Us" secondAttribute="bottom" constant="17" id="Fkj-Dg-dVl"/>
+                    <constraint firstItem="vY6-ea-2Us" firstAttribute="trailing" secondItem="zsH-Wr-zkN" secondAttribute="trailing" id="R6F-JA-9lg"/>
+                    <constraint firstItem="zsH-Wr-zkN" firstAttribute="top" secondItem="R7s-8u-2yp" secondAttribute="top" constant="17" id="RKW-Rg-KaC"/>
+                    <constraint firstItem="vY6-ea-2Us" firstAttribute="top" secondItem="zsH-Wr-zkN" secondAttribute="bottom" constant="8" id="fAI-db-cfM"/>
+                    <constraint firstItem="zsH-Wr-zkN" firstAttribute="leading" secondItem="R7s-8u-2yp" secondAttribute="leading" constant="15" id="lp8-Xz-eUw"/>
+                    <constraint firstItem="vY6-ea-2Us" firstAttribute="leading" secondItem="zsH-Wr-zkN" secondAttribute="leading" id="uuj-zg-tcx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="segmentControl" destination="vY6-ea-2Us" id="5FM-Vq-fb2"/>
+                <outlet property="titleLabel" destination="zsH-Wr-zkN" id="mue-rp-kGY"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

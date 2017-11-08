@@ -48,6 +48,7 @@ public struct AdminSettingsConstants {
         public static let templateURLTitle = "Template URL"
         public static let navigationTitle = "Settings"
         public static let uploadtoDriveTitle = "Upload DB To Drive"
+        public static let selectSSLPinningType = "Select SSL Pinning Type"
     }
 
     enum StaticAppMessages {
@@ -65,6 +66,14 @@ public struct AdminSettingsConstants {
         static let backBtnArrowNegativeSpacer = -10
         static let saveBtnWidth = 71
         static let saveBtnHeight = 30
+    }
+   
+    public enum SSLPinningConstants {
+        public static let pinningTypeKey = "SSLPinningType"
+        public static let publicKeyPinning = "PublickKeyPinning"
+        public static let ceritificatePinning = "CertificatePinning"
+        public static let disablePinning = "DisablePinning"
+        public static let prevPinningTypeKey = "PrevSSLPinningType"
     }
 
 }
